@@ -122,6 +122,62 @@
     text-align:center;margin-top:38px;
     font-size:13px;font-weight:700;opacity:.65;line-height:1.6;
   }
+
+  /* ---------- PremiApp bot slide-in ---------- */
+  .premibot-panel{
+    position:fixed;right:18px;bottom:18px;z-index:90;
+    width:min(calc(100% - 36px),380px);
+    background:var(--paper);color:var(--ink);
+    border:2.5px solid var(--ink);border-radius:16px;
+    box-shadow:6px 6px 0 var(--ink);
+    padding:26px;
+    transform:translateX(calc(100% + 36px));
+    visibility:hidden;
+    transition:transform .32s ease, visibility 0s linear .32s;
+  }
+  .premibot-panel.open{transform:translateX(0);visibility:visible;transition:transform .32s ease}
+  .premibot-close{
+    position:absolute;top:12px;right:12px;
+    width:36px;height:36px;
+    display:grid;place-items:center;
+    background:var(--paper);border:2.5px solid var(--ink);border-radius:12px;
+    font-size:19px;font-weight:800;line-height:1;color:var(--ink);cursor:pointer;
+  }
+  .premibot-close:active{transform:translate(2px,2px)}
+  .premibot-tile{
+    width:52px;height:52px;margin-bottom:16px;
+    background:var(--yellow);border:2.5px solid var(--ink);border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .premibot-tile svg{width:26px;height:26px;fill:var(--ink)}
+  .premibot-eyebrow{font-size:11.5px;font-weight:800;letter-spacing:.22em;opacity:.6;margin-bottom:8px}
+  .premibot-panel h3{font-size:23px;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin-bottom:10px}
+  .premibot-body{font-size:15px;font-weight:500;line-height:1.55;opacity:.75;margin-bottom:20px}
+  .premibot-cta{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    background:var(--ink);color:#fff;
+    border:2.5px solid var(--ink);border-radius:14px;
+    box-shadow:4px 4px 0 rgba(17,17,17,.35);
+    padding:14px 16px;margin-bottom:12px;
+    font-size:16px;font-weight:800;text-decoration:none;
+  }
+  .premibot-cta:active{transform:translate(2px,2px);box-shadow:2px 2px 0 rgba(17,17,17,.35)}
+  .premibot-cta svg{width:19px;height:19px;fill:#fff}
+  .premibot-handle{text-align:center;font-size:12.5px;font-weight:800;letter-spacing:.06em;opacity:.6;margin-bottom:12px}
+  .premibot-catalog{display:block;text-align:center;font-size:14px;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+  .premibot-fab{
+    position:fixed;right:18px;bottom:18px;z-index:80;
+    width:54px;height:54px;
+    display:grid;place-items:center;
+    background:var(--ink);color:var(--yellow);
+    border:2.5px solid var(--ink);border-radius:16px;
+    box-shadow:4px 4px 0 rgba(17,17,17,.35);
+    cursor:pointer;
+    transition:opacity .2s ease, visibility 0s;
+  }
+  .premibot-fab.hidden{opacity:0;visibility:hidden;pointer-events:none}
+  .premibot-fab svg{width:26px;height:26px;fill:var(--yellow)}
+  .premibot-fab:active{transform:translate(2px,2px)}
 </style>
 </head>
 <body>
@@ -296,5 +352,46 @@
   <div class="footer">Peka AI &copy; 2026<br>Semua link resmi ada di halaman ini.</div>
 
 </div>
+
+<!-- PremiApp bot slide-in -->
+<div class="premibot-panel" id="premibot-panel" role="dialog" aria-label="Order akun premium langsung di Telegram" aria-hidden="true">
+  <button class="premibot-close" id="premibot-close" type="button" aria-label="Tutup">&times;</button>
+  <span class="premibot-tile" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21.9 4.6 18.8 19.2c-.2 1-.8 1.3-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.7-7.9c.4-.3-.1-.5-.6-.2L6.7 13.1 2.1 11.7c-1-.3-1-1 .2-1.5L20.4 3.2c.8-.3 1.6.2 1.5 1.4Z"/></svg></span>
+  <p class="premibot-eyebrow">BELI LEWAT TELEGRAM</p>
+  <h3>Order akun premium langsung di Telegram</h3>
+  <p class="premibot-body">Gemini, Canva, CapCut, dan puluhan produk digital lainnya. Chat botnya, pilih produk, bayar QRIS, langsung dikirim.</p>
+  <a class="premibot-cta" href="https://t.me/aeternum_premibot" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21.9 4.6 18.8 19.2c-.2 1-.8 1.3-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.7-7.9c.4-.3-.1-.5-.6-.2L6.7 13.1 2.1 11.7c-1-.3-1-1 .2-1.5L20.4 3.2c.8-.3 1.6.2 1.5 1.4Z"/></svg>Buka Bot Telegram</a>
+  <p class="premibot-handle">@aeternum_premibot</p>
+  <a class="premibot-catalog" href="https://store.peka.ai.id" target="_blank" rel="noopener">Lihat katalog dulu</a>
+</div>
+<button class="premibot-fab" id="premibot-fab" type="button" aria-label="Buka popup bot PremiApp"><svg viewBox="0 0 24 24"><path d="M21.9 4.6 18.8 19.2c-.2 1-.8 1.3-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.7-7.9c.4-.3-.1-.5-.6-.2L6.7 13.1 2.1 11.7c-1-.3-1-1 .2-1.5L20.4 3.2c.8-.3 1.6.2 1.5 1.4Z"/></svg></button>
+<script>
+(function(){
+  var KEY = 'premibot-popup-seen';
+  var panel = document.getElementById('premibot-panel');
+  var fab = document.getElementById('premibot-fab');
+  var closeBtn = document.getElementById('premibot-close');
+  function open(){
+    panel.classList.add('open');
+    panel.setAttribute('aria-hidden','false');
+    fab.classList.add('hidden');
+    try { sessionStorage.setItem(KEY,'1'); } catch(e){}
+    closeBtn.focus();
+  }
+  function close(){
+    panel.classList.remove('open');
+    panel.setAttribute('aria-hidden','true');
+    fab.classList.remove('hidden');
+  }
+  closeBtn.addEventListener('click', close);
+  fab.addEventListener('click', open);
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+  try {
+    if (!sessionStorage.getItem(KEY)) setTimeout(open, 2500);
+  } catch(e) {
+    setTimeout(open, 2500);
+  }
+})();
+</script>
 </body>
 </html>
